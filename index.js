@@ -72,12 +72,6 @@ function render() {}
 function sortByPrice() {}
 
 /*
-  Accepts the id of a book to be removed from cart.
-  Remove the book with the corresponding id from the books array then call render()
-*/
-function deleteBook(book_id) {}
-
-/*
   Perform all startup tasks here. Use this function to attach the required event listeners
   then call render()
 */
