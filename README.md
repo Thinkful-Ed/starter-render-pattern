@@ -86,17 +86,21 @@ Calculate the total price of all items in the cart. Take into consideration that
 #### `render()`
 
 Render the array of books and the cart total and insert them into the DOM.
-The books should be rendered in the `section` with id "cartItems".
-The total should be rendered in the `div` with class "total-price" in the `section` with id "cartTotal".
+The books should be rendered in the `section` with id "cartItems". If there are no items in the cart the text "Nothing in cart" should be inserted here instead.
+The total should be rendered in the `div` with class "total-price" in the `section` with id "cartTotal". If there are no items in cart the total should show "\$0".
 
 #### `sortByPrice()`
 
-Sort the books array by price in ascending order then call render()
+Sort the books array by price in ascending order.
 
-#### `deleteBook(book_id)`
+Attach an event listener to the `#sortBtn` button that firsts sorts the array with the `sortByPrice()` function then calls render().
+
+<!-- #### `deleteBook(book_id)`
 
 Accepts a parameter `book_id` representing the id of a book to be removed from cart.
-Remove the book with the corresponding id from the books array then call render()
+Remove the book with the corresponding id from the books array.
+
+Attach an event listener that deletes the corresponding book when the `.removeBtn` is clicked, then call render(). -->
 
 ## License
 

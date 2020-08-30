@@ -1,6 +1,10 @@
 const expect = chai.expect;
 
 describe("Render Pattern", function () {
+  after(function () {
+    render();
+  });
+
   describe("renderBook()", function () {
     const dom = document.createElement("div");
     const book = books[Math.floor(Math.random() * books.length)];
@@ -59,7 +63,6 @@ describe("Render Pattern", function () {
 
     afterEach(function () {
       books.splice(0, books.length, ...temp);
-      console.log(books);
     });
 
     it("should return 0 when cart is empty", function () {
@@ -92,17 +95,57 @@ describe("Render Pattern", function () {
   });
 
   describe("render()", function () {
-    before(function () {});
+    describe("when cart is empty", function () {
+      let temp;
+      beforeEach(function () {
+        temp = [...books];
+        books.splice(0);
+      });
 
-    after(function () {});
+      afterEach(function () {
+        books.splice(0, books.length, ...temp);
+      });
 
-    it("should display 'Nothing in cart' when cart is empty", function () {});
+      it("should display 'Nothing in cart' when cart is empty", function () {
+        render();
+        const items = document.querySelector("#cartItems");
+        expect(items.innerHTML).to.equal("Nothing in cart");
+      });
 
-    it("should display a total of 0 when nothing in cart", function () {});
+      it("should display a total of 0 when nothing in cart", function () {
+        render();
+        const price = document.querySelector(".total-price");
+        expect(price.innerHTML).to.contain("$0");
+      });
+    });
 
-    it("should display all items in cart", function () {});
+    describe("when cart is not empty", function () {
+      let temp;
+      beforeEach(function () {
+        temp = [...books];
+        const updated = books.map((book) => ({
+          ...book,
+          quantity: 2,
+          price: 10,
+        }));
+        books.splice(0, books.length, ...updated);
+      });
 
-    it("should display total price of items in cart", function () {});
+      afterEach(function () {
+        books.splice(0, books.length, ...temp);
+      });
+      it("should display all items in cart", function () {
+        render();
+        const items = document.querySelectorAll("#cartItems .book");
+        expect(items.length).to.equal(5);
+      });
+
+      it("should display total price of items in cart", function () {
+        render();
+        const price = document.querySelector(".total-price");
+        expect(price.innerHTML).to.contain("$100");
+      });
+    });
   });
 
   describe("sortByPrice()", function () {
@@ -117,17 +160,5 @@ describe("Render Pattern", function () {
     it("should render the sorted array", function () {});
 
     it("should be able to click on the sort button to sort", function () {});
-  });
-
-  describe("deleteBook()", function () {
-    before(function () {});
-
-    after(function () {});
-
-    it("should be able to click on a delete button to delete a book", function () {});
-
-    it("should remove the book with given id from the array", function () {});
-
-    it("should render updated array", function () {});
   });
 });
