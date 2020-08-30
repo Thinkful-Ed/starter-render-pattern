@@ -95,13 +95,6 @@ Sort the books array by price in ascending order.
 
 Attach an event listener to the `#sortBtn` button that firsts sorts the array with the `sortByPrice()` function then calls render().
 
-<!-- #### `deleteBook(book_id)`
-
-Accepts a parameter `book_id` representing the id of a book to be removed from cart.
-Remove the book with the corresponding id from the books array.
-
-Attach an event listener that deletes the corresponding book when the `.removeBtn` is clicked, then call render(). -->
-
 ## License
 
 This is [MIT Licensed](LICENSE)
