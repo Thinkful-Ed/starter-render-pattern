@@ -52,15 +52,43 @@ describe("Render Pattern", function () {
   });
 
   describe("calculateTotal()", function () {
-    before(function () {});
+    let temp;
+    beforeEach(function () {
+      temp = [...books];
+    });
 
-    after(function () {});
+    afterEach(function () {
+      books.splice(0, books.length, ...temp);
+      console.log(books);
+    });
 
-    it("should return 0 when cart is empty", function () {});
+    it("should return 0 when cart is empty", function () {
+      books.splice(0);
+      const answer = calculateTotal();
+      expect(answer).to.equal(0);
+    });
 
-    it("should sum prices of single items", function () {});
+    it("should sum prices of single items", function () {
+      const updated = books.map((book) => ({
+        ...book,
+        quantity: 1,
+        price: 10,
+      }));
+      books.splice(0, books.length, ...updated);
+      const answer = calculateTotal();
+      expect(answer).to.equal(50);
+    });
 
-    it("should sum prices * quantities for multiple items", function () {});
+    it("should sum price * quantity for multiple items", function () {
+      const updated = books.map((book) => ({
+        ...book,
+        quantity: 2,
+        price: 10,
+      }));
+      books.splice(0, books.length, ...updated);
+      const answer = calculateTotal();
+      expect(answer).to.equal(100);
+    });
   });
 
   describe("render()", function () {
