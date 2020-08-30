@@ -2,11 +2,53 @@ const expect = chai.expect;
 
 describe("Render Pattern", function () {
   describe("renderBook()", function () {
-    before(function () {});
+    const dom = document.createElement("div");
+    const book = books[Math.floor(Math.random() * books.length)];
+
+    before(function () {
+      dom.innerHTML = renderBook(book);
+    });
 
     after(function () {});
 
-    it("should create HTML code for given book", function () {});
+    it('should create div with class "title" for title', function () {
+      expect(dom.querySelector(".title").innerHTML).to.contain(book.title);
+      expect(dom.querySelector(".title").tagName).to.equal("DIV");
+    });
+
+    it('should create span with class "rating" for rating', function () {
+      expect(dom.querySelector(".rating").innerHTML).to.contain(book.rating);
+      expect(dom.querySelector(".rating").tagName).to.equal("SPAN");
+    });
+
+    it('should create div with class "authors" for authors', function () {
+      expect(dom.querySelector(".authors").innerHTML).to.contain(
+        book.authors[0]
+      );
+      expect(dom.querySelector(".authors").tagName).to.equal("DIV");
+    });
+
+    it("should include a delete button", function () {
+      const button = dom.querySelector("button");
+      expect(button).to.not.be.null;
+      expect(button.className).to.equal("removeBtn");
+      expect(button.innerHTML).to.equal("Remove from cart");
+    });
+
+    it('should create div with class "quantity" for quantity', function () {
+      expect(dom.querySelector(".quantity").innerHTML).to.contain(
+        book.quantity
+      );
+      expect(dom.querySelector(".quantity").innerHTML).to.contain(book.price);
+      expect(dom.querySelector(".quantity").tagName).to.equal("DIV");
+    });
+
+    it('should create div with class "price" for price', function () {
+      expect(dom.querySelector(".price").innerHTML).to.equal(
+        `$${book.quantity * book.price}`
+      );
+      expect(dom.querySelector(".price").tagName).to.equal("DIV");
+    });
   });
 
   describe("calculateTotal()", function () {
