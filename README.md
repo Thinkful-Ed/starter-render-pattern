@@ -61,7 +61,22 @@ This function accepts a book object in the format described above.
 Create and return the HTML to render a single book. The HTML for a single book should look like this:
 
 ```html
-
+<div class="book">
+  <div class="details">
+    <div class="title">
+      Elements of the Theory of Computation
+      <span class="rating">(4.7 stars)</span>
+    </div>
+    <div class="authors">by Harry Lewis, Christos H. Papadimitriou</div>
+    <div class="description">
+      Algorithms, complexity analysis, and algorithmic ideas are introduced
+      informally in Chapter 1, and are pursued throughout the book.
+    </div>
+    <button class="removeBtn">Remove from cart</button>
+  </div>
+  <div class="quantity">2 @ $182.65</div>
+  <div class="price">$365.30</div>
+</div>
 ```
 
 #### `calculateTotal()`
@@ -72,13 +87,7 @@ Calculate the total price of all items in the cart. Take into consideration that
 
 Render the array of books and the cart total and insert them into the DOM.
 The books should be rendered in the `section` with id "cartItems".
-The total should be rendered in the `section` with id "cartTotal".
-
-The HTML for the cart total should look like this:
-
-```html
-
-```
+The total should be rendered in the `div` with class "total-price" in the `section` with id "cartTotal".
 
 #### `sortByPrice()`
 

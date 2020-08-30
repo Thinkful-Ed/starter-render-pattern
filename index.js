@@ -1,7 +1,52 @@
 /*
  The books array contain the list of books in the shopping cart.
 */
-const books = [];
+const books = [
+  {
+    title: "PROLOG Programming for Artificial Intelligence",
+    authors: ["Ivan Bratko"],
+    description:
+      "Prolog has its roots in logic; however the main aim of this book is to teach Prolog as a practical programming tool.",
+    price: 89.29,
+    rating: 4.5,
+    quantity: 1,
+  },
+  {
+    title: "Elements of the Theory of Computation",
+    authors: ["Harry Lewis", "Christos H. Papadimitriou"],
+    description:
+      "Algorithms, complexity analysis, and algorithmic ideas are introduced informally in Chapter 1, and are pursued throughout the book.",
+    price: 182.65,
+    rating: 4.7,
+    quantity: 2,
+  },
+  {
+    title: "The Silmarillion",
+    authors: ["J.R.R. Tolkien"],
+    description:
+      "THE SILMARILLION is the core of J.R.R. Tolkien's imaginative writing, a work whose origins stretch back to a time long before THE HOBBIT.",
+    price: 14.85,
+    rating: 5,
+    quantity: 1,
+  },
+  {
+    title: "An Introduction to the Analysis of Algorithms",
+    authors: ["Sedgewick Robert", "Flajolet Philippe"],
+    description: "Methods and models for mathematically analyzing algorithms.",
+    price: 51.19,
+    rating: 4.2,
+    quantity: 10,
+  },
+  {
+    title: "The Art of Computer Programming, Volumes 1-4A Boxed Set",
+    authors: ["Donald E. Knuth"],
+    description:
+      "The bible of all fundamental algorithms and the work that taught many of today’s software developers most of what they know about computer programming.",
+    price: 189.98,
+    rating: 5,
+    quantity: 2,
+  },
+];
 
 /*
  Create and return the HTML to render a single book.
