@@ -38,7 +38,7 @@ const books = [
     quantity: 10,
   },
   {
-    title: "The Art of Computer Programming, Volumes 1-4A Boxed Set",
+    title: "The Art of Computer Programming, Volumes 1-4",
     authors: ["Donald E. Knuth"],
     description:
       "The bible of all fundamental algorithms and the work that taught many of today’s software developers most of what they know about computer programming.",
@@ -52,35 +52,67 @@ const books = [
  Create and return the HTML to render a single book.
  The `book` parameter is an object representing a single book. 
 */
-function renderBook(book) {}
+function renderBook(book) {
+  const { title, authors, description, price, rating, quantity } = book;
+  return `
+  <div class="book">
+    <div class="details">
+      <div class="title">
+        ${title}
+        <span class="rating">(${rating} stars)</span>
+      </div>
+      <div class="authors">by ${authors.join(", ")}</div>
+      <div class="description">
+        ${description}
+      </div>
+      <button class="removeBtn">Remove from cart</button>
+    </div>
+    <div class="quantity">${quantity} @ $${price}</div>
+    <div class="price">$${quantity * price}</div>
+  </div>
+  `;
+}
 
 /*
   Calculate and return the total price of all items in the cart.
  */
-function calculateTotal() {}
+function calculateTotal() {
+  return books.reduce((acc, curr) => acc + curr.quantity * curr.price, 0);
+}
 
 /*
   Render the array of books and the cart total and insert them on the DOM.
   The books should be rendered in the `section` with id "cartItems".
   The total should be rendered in the `section` with id "cartTotal".
 */
-function render() {}
+function render() {
+  const itemsElement = document.querySelector("#cartItems");
+  if (books.length) {
+    const items = books.map(renderBook).join("");
+    itemsElement.innerHTML = items;
+  } else {
+    itemsElement.innerHTML = "Nothing in cart";
+  }
+
+  const totalElement = document.querySelector(".total-price");
+  totalElement.innerHTML = `$${calculateTotal()}`;
+}
 
 /*
   Sort the books array by price in ascending order then call render()
 */
-function sortByPrice() {}
-
-/*
-  Accepts the id of a book to be removed from cart.
-  Remove the book with the corresponding id from the books array then call render()
-*/
-function deleteBook(book_id) {}
+function sortByPrice() {
+  books.sort((a, b) => a.price - b.price);
+  render();
+}
 
 /*
   Perform all startup tasks here. Use this function to attach the required event listeners
   then call render()
 */
-function main() {}
+function main() {
+  const sortButton = document.querySelector("#sortBtn");
+  sortButton.addEventListener("click", sortByPrice);
+}
 
 window.addEventListener("DOMContentLoaded", main);
