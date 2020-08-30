@@ -149,16 +149,68 @@ describe("Render Pattern", function () {
   });
 
   describe("sortByPrice()", function () {
-    before(function () {});
+    describe("when array is empty", function () {
+      let temp;
+      beforeEach(function () {
+        temp = [...books];
+        books.splice(0);
+      });
 
-    after(function () {});
+      afterEach(function () {
+        books.splice(0, books.length, ...temp);
+      });
 
-    it("should result in empty array when array is empty ", function () {});
+      it("should result in empty array when array is empty ", function () {
+        sortByPrice();
+        expect(books).to.deep.equal([]);
+      });
+    });
 
-    it("should sort books in ascending order of price", function () {});
+    describe("when array is not empty", function () {
+      let temp;
+      beforeEach(function () {
+        temp = [...books];
+      });
 
-    it("should render the sorted array", function () {});
+      afterEach(function () {
+        books.splice(0, books.length, ...temp);
+      });
+      it("should sort books in ascending order of price", function () {
+        const sortedPrices = books
+          .map((book) => book.price)
+          .sort((a, b) => a - b);
+        console.log(sortedPrices);
+        sortByPrice();
+        console.log(books);
+        expect(books.every((book, i) => book.price === sortedPrices[i])).to.be
+          .true;
+      });
 
-    it("should be able to click on the sort button to sort", function () {});
+      it("should render the sorted array", function () {
+        const sortedBooks = books
+          .sort((a, b) => a.price - b.price)
+          .map((book) => book.title);
+        sortByPrice();
+        const renderedItems = document.querySelectorAll(
+          "#cartItems .book .title"
+        );
+        expect(
+          Array.from(renderedItems).every((book, i) =>
+            book.innerHTML.includes(sortedBooks[i])
+          )
+        ).to.be.true;
+      });
+
+      it("should be able to click on the sort button to sort", function () {
+        const sortedPrices = books
+          .map((book) => book.price)
+          .sort((a, b) => a - b);
+        const button = document.querySelector("#sortBtn");
+        const event = new window.Event("click");
+        button.dispatchEvent(event);
+        expect(books.every((book, i) => book.price === sortedPrices[i])).to.be
+          .true;
+      });
+    });
   });
 });
